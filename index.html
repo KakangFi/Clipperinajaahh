@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070812">
+  <title>ClipForge — Auto Video Clipper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div><div class="orb orb-a"></div><div class="orb orb-b"></div>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✦</span><span>CLIP<span>FORGE</span></span></div>
+      <div class="badge">LOCAL PROCESSING</div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">LONG VIDEO → SHORT CLIPS</p>
+      <h1>Forge your best<br><span>moments.</span></h1>
+      <p class="sub">Potong video panjang menjadi beberapa clip pendek langsung di browser. File video tetap di perangkatmu.</p>
+    </section>
+
+    <section class="panel">
+      <div id="dropzone" class="dropzone">
+        <input id="fileInput" type="file" accept="video/*" hidden>
+        <div class="upload-icon">↥</div>
+        <h2>Drop video di sini</h2>
+        <p>atau pilih video dari perangkat</p>
+        <button id="chooseBtn" class="btn primary">PILIH VIDEO</button>
+        <small>MP4 · WebM · MOV* · file besar diproses bertahap</small>
+      </div>
+
+      <div id="workspace" class="workspace hidden">
+        <div class="video-head">
+          <div>
+            <div id="fileName" class="file-name"></div>
+            <div id="fileMeta" class="muted"></div>
+          </div>
+          <button id="changeBtn" class="btn ghost">GANTI</button>
+        </div>
+        <video id="sourceVideo" controls playsinline preload="metadata"></video>
+
+        <div class="controls">
+          <div class="control">
+            <label>Durasi clip</label>
+            <div class="segmented" id="durationGroup">
+              <button data-value="15">15s</button><button data-value="30" class="active">30s</button>
+              <button data-value="45">45s</button><button data-value="60">60s</button>
+            </div>
+          </div>
+          <div class="control">
+            <label>Jumlah clip</label>
+            <input id="countInput" type="number" min="1" max="30" value="8">
+          </div>
+          <div class="control">
+            <label>Mode</label>
+            <select id="modeSelect">
+              <option value="spread">Sebar sepanjang video</option>
+              <option value="start">Dari awal video</option>
+              <option value="random">Variasi acak</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="note">
+          <span>⚡</span>
+          <div><b>Auto clip lokal</b><br><span>Versi ini memilih titik clip secara otomatis. Tidak ada upload ke server.</span></div>
+        </div>
+
+        <button id="generateBtn" class="btn generate">GENERATE CLIPS <span>→</span></button>
+        <div id="progressWrap" class="progress-wrap hidden">
+          <div class="progress-line"><span id="progressBar"></span></div>
+          <div class="progress-text"><span id="progressLabel">Menyiapkan…</span><span id="progressPct">0%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results hidden">
+      <div class="results-head">
+        <div><p class="eyebrow">OUTPUT</p><h2 id="resultsTitle">Your clips</h2></div>
+        <button id="downloadAllBtn" class="btn primary">DOWNLOAD ALL</button>
+      </div>
+      <div id="clipGrid" class="clip-grid"></div>
+    </section>
+
+    <footer>CLIPFORGE · Browser-only processing · Your video stays on your device</footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
